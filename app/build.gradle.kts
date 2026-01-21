@@ -155,14 +155,14 @@ android {
 
     val localProperties = Properties()
     try {
-        localProperties.load(project.file("local.properties").inputStream())
+        FileInputStream(project.file("local.properties")).use { localProperties.load(it) }
     } catch (ex: Exception) {}
     
     if (localProperties.containsKey("signing.properties") &&
         File(localProperties.getProperty("signing.properties")).exists()) {
 
         val props = Properties()
-        props.load(FileInputStream(file(localProperties.getProperty("signing.properties"))))
+        FileInputStream(file(localProperties.getProperty("signing.properties"))).use { props.load(it) }
 
         println("Loaded signing properties from ${localProperties.getProperty("signing.properties")}")
 
