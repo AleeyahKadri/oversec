@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    val kotlinVersion = "1.3.11"
+    val kotlinVersion = "1.5.31"
     extra["kotlinVersion"] = kotlinVersion
     
     repositories {
@@ -12,7 +12,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:3.2.1")
+        classpath("com.android.tools.build:gradle:4.2.2")
         classpath("ru.tinkoff.gradle:jarjar:1.1.0")
         classpath("gradle.plugin.com.gladed.gradle.androidgitversion:gradle-android-git-version:0.2.21")
         classpath(files("gradle-witness.jar"))
