@@ -271,9 +271,9 @@ tasks.whenTaskAdded {
 File("app/src").listFiles()
     ?.filter { it.isDirectory }
     ?.forEach {
-        try {
+        val mixinPath = "src/${it.name}/mixin.gradle"
+        if (file(mixinPath).exists()) {
             apply(from = "src/${it.name}/mixin.gradle")
-        } catch (_: Exception) {
         }
     }
 
@@ -294,7 +294,7 @@ val replaceEntities: (String, File, File, File) -> Unit = { apptgt, sfile, tdir,
 val preBuildMangleEntities = tasks.register("preBuildMangleEntities") {
     doLast {
         val taskNames = project.gradle.startParameter.taskNames
-        val taskName = taskNames.firstOrNull().orEmpty()
+        val taskName = if (taskNames.isEmpty()) "" else taskNames.first()
         var appTgt = taskName
             .replace(":app:", "")
             .replace("assemble", "")
